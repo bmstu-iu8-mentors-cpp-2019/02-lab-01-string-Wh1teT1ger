@@ -5,6 +5,7 @@
 
 #include <cstddef>
 #include <iostream>
+#include <utility>
 
 class String {
 public:
@@ -21,7 +22,7 @@ public:
     /// Пользовательский конструктор
     /// <param name="data">Данные, которые требуется поместить в создаваемый
     /// объект </param>
-    String(const char *data);
+    explicit String(const char *data);
 
     /// Оператор присваивания
     /// <param name="data">Объект, который копируем </param>
@@ -54,6 +55,8 @@ public:
     /// <returns>Возвращаем позицию substr. Если подстрока не найдена, то
     /// возвратить -1</returns>
     size_t Find(const String &substr) const;
+
+    size_t Find(const char *str) const;
 
     /// Функция замены символов, заменяет все символы oldSymbol на newSymbol.
     /// <param name="oldSymbol">Символ, который требуется заменить </param>

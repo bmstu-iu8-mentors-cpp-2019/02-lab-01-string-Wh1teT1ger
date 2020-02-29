@@ -22,7 +22,6 @@ String::String(const String &rhs) : Size_(rhs.Size_) {
     if (rhs.Data != nullptr) {
         Data = new char[Size_];
         for (size_t i = 0; i < Size_; i++) Data[i] = rhs.Data[i];
-
     }
 }
 
@@ -44,7 +43,8 @@ String &String::operator=(const String &rhs) {
 
 String &String::operator+=(const String &rhs) {
     resize(rhs.Size_ + Size_);
-    for (size_t i = Size_ - rhs.Size(); i < Size_; i++) Data[i] = rhs.Data[i - Size_ + rhs.Size_];
+    for (size_t i = Size_ - rhs.Size(); i < Size_; i++)
+        Data[i] = rhs.Data[i - Size_ + rhs.Size_];
     return *this;
 }
 
@@ -52,7 +52,8 @@ String &String::operator+=(const char *rhs) {
     size_t size = 0;
     for (size_t i = 0; rhs[i] != '\0'; i++) size++;
     resize(Size_ + size);
-    for (size_t i = Size_ - size; i < Size_; i++) Data[i] = rhs[i - Size_ + size];
+    for (size_t i = Size_ - size; i < Size_; i++)
+        Data[i] = rhs[i - Size_ + size];
     return *this;
 }
 
@@ -93,6 +94,19 @@ size_t String::Find(const String &substr) const {
     return -1;
 }
 
+size_t String::Find(const char *str) const{
+    String substr(str);
+    for (size_t i = 0; i < Size_; i++) {
+        if (substr[0] == Data[i]) {
+            for (size_t j = 0; j < substr.Size_; j++) {
+                if (substr.Data[j] != Data[i + j]) break;
+                if (j == substr.Size_ - 1) return i;
+            }
+        }
+    }
+    return -1;
+}
+
 void String::Replace(char oldSymbol, char newSymbol) {
     for (size_t i = 0; i < Size_; i++) {
         if (Data[i] == oldSymbol) Data[i] = newSymbol;
@@ -120,7 +134,9 @@ void String::RTrim(char symbol) {
     for (size_t i = Size_ - 1; i >= 0; i--) {
         if (Data[i] == symbol) {
             count++;
-        } else break;
+        } else {
+            break;
+        }
     }
     resize(Size_ - count);
 }
@@ -130,7 +146,9 @@ void String::LTrim(char symbol) {
     for (size_t i = 0; i < Size_; i++) {
         if (Data[i] == symbol) {
             count++;
-        } else break;
+        } else {
+            break;
+        }
     }
     Size_ = Size_ - count;
     char *newData = new char[Size_];
