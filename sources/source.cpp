@@ -130,7 +130,7 @@ char &String::operator[](size_t index) {
 }
 
 void String::RTrim(char symbol) {
-    int count = 0;
+    size_t count = 0;
     for (size_t i = Size_; i > 0; i--) {
         if (Data[i - 1] == symbol) {
             count++;
@@ -142,7 +142,7 @@ void String::RTrim(char symbol) {
 }
 
 void String::LTrim(char symbol) {
-    int count = 0;
+    size_t count = 0;
     for (size_t i = 0; i < Size_; i++) {
         if (Data[i] == symbol) {
             count++;
