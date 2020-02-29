@@ -94,7 +94,7 @@ size_t String::Find(const String &substr) const {
     return -1;
 }
 
-size_t String::Find(const char *str) const{
+size_t String::Find(const char *str) const {
     String substr(str);
     for (size_t i = 0; i < Size_; i++) {
         if (substr[0] == Data[i]) {
@@ -131,8 +131,8 @@ char &String::operator[](size_t index) {
 
 void String::RTrim(char symbol) {
     int count = 0;
-    for (size_t i = Size_ - 1; i >= 0; i--) {
-        if (Data[i] == symbol) {
+    for (size_t i = Size_; i > 0; i--) {
+        if (Data[i - 1] == symbol) {
             count++;
         } else {
             break;
