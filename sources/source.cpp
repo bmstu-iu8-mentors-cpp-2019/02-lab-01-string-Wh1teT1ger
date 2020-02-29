@@ -138,7 +138,13 @@ void String::RTrim(char symbol) {
             break;
         }
     }
-    resize(Size_ - count);
+    Size_ = Size_ - count;
+    char *newData = new char[Size_];
+    for (size_t i = 0; i < Size_; i++) {
+        newData[i] = Data[i];
+    }
+    delete[] Data;
+    Data = newData;
 }
 
 void String::LTrim(char symbol) {
