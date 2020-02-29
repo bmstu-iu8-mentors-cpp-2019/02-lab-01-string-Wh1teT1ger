@@ -72,10 +72,10 @@ TEST(String, Mult) {
   String s1("ABC");
   s1 *= 2;
 
-  EXPECT_EQ(s1, String("ABCABCABC"));
+  EXPECT_EQ(s1, String("ABCABC"));
 
   String s2 = s1 * 3;
-  EXPECT_EQ(s2, String("ABCABCABCABCABCABCABCABCABC"));
+  EXPECT_EQ(s2, String("ABCABCABCABCABCABC"));
 }
 
 TEST(String, Trim) {
@@ -97,7 +97,6 @@ TEST(String, Find) {
   EXPECT_EQ(4, s1.Find(" "));
   EXPECT_EQ(5, s1.Find("str"));
   EXPECT_EQ(0, s1.Find("some"));
-  
   EXPECT_EQ(9, String{"str stri string"}.Find(String{"string"}));
   EXPECT_EQ(6, String{"strinsstring"}.Find(String{"string"}));
 
@@ -115,7 +114,6 @@ TEST(String, Stream) {
 TEST(String, Swap) {
   String s0("some string");
   String s1("other string");
-  
 
   EXPECT_EQ("some string", s0);
   EXPECT_EQ("other string", s1);
