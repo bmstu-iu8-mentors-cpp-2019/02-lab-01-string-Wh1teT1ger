@@ -49,16 +49,16 @@ String &String::operator+=(const String &rhs) {
 }
 
 String &String::operator+=(const char *rhs) {
-    size_t size = 0;
-    for (size_t i = 0; rhs[i] != '\0'; i++) size++;
-    resize(Size_ + size);
-    for (size_t i = Size_ - size; i < Size_; i++)
-        Data[i] = rhs[i - Size_ + size];
+    String rh(rhs);
+    resize(Size_ + rh.Size_);
+    for (size_t i = Size_ - rh.Size_; i < Size_; i++)
+        Data[i] = rhs[i - Size_ + rh.Size_];
     return *this;
 }
 
 String &String::operator*=(unsigned int m) {
-    for (size_t i = 1; i < m; i++) *this += Data;
+    String a(*this);
+    for (size_t i = 1; i < m; i++) *this += a;
     return *this;
 }
 
